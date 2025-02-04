@@ -4,6 +4,7 @@ import Data.List (sortBy, subsequences)
 import Data.Ord (comparing)
 import Data.Ratio
 
+-- Find the combination of these fractions such that they add up as close as possible to 1
 candidates :: [(String, Ratio Int)]
 candidates =
     [ ("1/6", 1 % 6)
