@@ -4,7 +4,7 @@ import Data.List (sortBy, subsequences)
 import Data.Ord (comparing)
 import Data.Ratio
 
--- Find the combination of these fractions such that they add up as close as possible to 1
+-- Find the combination of a sum of fractions closest to 1
 candidates :: [(String, Ratio Int)]
 candidates =
     [ ("1/6", 1 % 6)
@@ -16,7 +16,7 @@ candidates =
     ]
 
 main :: IO ()
-main = prettyPrint . head . sortByClosest $ allPermutations candidates
+main = prettyPrint . head . sortByClosest $ subsequences candidates
 
 prettyPrint :: [(String, Ratio Int)] -> IO ()
 prettyPrint l = do
@@ -30,7 +30,4 @@ diffFromOne :: Ratio Int -> Ratio Int
 diffFromOne r = abs (r - 1)
 
 sortByClosest :: [[(String, Ratio Int)]] -> [[(String, Ratio Int)]]
-sortByClosest = sortBy (comparing (diffFromOne . sumRatios))
-
-allPermutations :: [(String, Ratio Int)] -> [[(String, Ratio Int)]]
-allPermutations = subsequences
+sortByClosest = sortBy $ comparing $ diffFromOne . sumRatios
